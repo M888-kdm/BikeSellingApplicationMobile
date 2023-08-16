@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">VenteDeVelosMobile</string>
+    <string name="nom">Nom</string>
+    <string name="prixDepart">Prix Départ</string>
+    <string name="anneeModel">Année Modèle</string>
+    <string name="marque">Marque</string>
+    <string name="categorie">Catégorie</string>
+    <string name="id">Id</string>
+    <string name="numero">Numéro</string>
+    <string name="codeZip">Code Zip</string>
+    <string name="adresse">Adresse</string>
+    <string name="prenom">Prénom</string>
+</resources>
