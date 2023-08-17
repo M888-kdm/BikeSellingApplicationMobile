@@ -6,30 +6,12 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity(foreignKeys = {
-        @ForeignKey(entity = Magasin.class, parentColumns = "id", childColumns = "magasin_id")
-})
-public class Employe extends Personne {
+import java.util.HashMap;
 
-    @PrimaryKey(autoGenerate = true)
-    private Integer id;
+public class Employe extends Client {
 
-    @ColumnInfo(name = "magasin_id")
-    private Integer magasinId;
+    public Integer id;
+    public HashMap<String, Object> magasin;
+    public HashMap<String, Object> manager;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getMagasinId() {
-        return magasinId;
-    }
-
-    public void setMagasinId(Integer magasinId) {
-        this.magasinId = magasinId;
-    }
 }

@@ -7,83 +7,19 @@ import androidx.room.PrimaryKey;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashMap;
 
-@Entity(foreignKeys = {
-        @ForeignKey(entity = Client.class, parentColumns = "id", childColumns = "client_id"),
-        @ForeignKey(entity = Employe.class, parentColumns = "id", childColumns = "vendeur_id"),
-        @ForeignKey(entity = Magasin.class, parentColumns = "id", childColumns = "magasin_id")
-})
 public class Commande {
+    public Integer numero;
+    public short statut;
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "NUMERO")
-    private Integer numero;
-    @ColumnInfo(name = "date_livraison")
-    private LocalDate dateLivraison;
-    @ColumnInfo(name = "date_commande")
-    private LocalDate dateCommande;
-    @ColumnInfo(name = "date_livraison_voulue")
-    private LocalDate dateLivraisonVoulue;
-    @ColumnInfo(name = "client_id")
-    private Integer clientId;
-    @ColumnInfo(name = "vendeur_id")
-    private Integer vendeurId;
-    @ColumnInfo(name = "magasin_id")
-    private Integer magasinId;
+    public String dateCommande;
 
-    public Integer getNumero() {
-        return numero;
-    }
+    public String dateLivraisonVoulue;
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
+    public String dateLivraison;
 
-    public LocalDate getDateLivraison() {
-        return dateLivraison;
-    }
-
-    public void setDateLivraison(LocalDate dateLivraison) {
-        this.dateLivraison = dateLivraison;
-    }
-
-    public LocalDate getDateCommande() {
-        return dateCommande;
-    }
-
-    public void setDateCommande(LocalDate dateCommande) {
-        this.dateCommande = dateCommande;
-    }
-
-    public LocalDate getDateLivraisonVoulue() {
-        return dateLivraisonVoulue;
-    }
-
-    public void setDateLivraisonVoulue(LocalDate dateLivraisonVoulue) {
-        this.dateLivraisonVoulue = dateLivraisonVoulue;
-    }
-
-    public Integer getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
-    }
-
-    public Integer getVendeurId() {
-        return vendeurId;
-    }
-
-    public void setVendeurId(Integer vendeurId) {
-        this.vendeurId = vendeurId;
-    }
-
-    public Integer getMagasinId() {
-        return magasinId;
-    }
-
-    public void setMagasinId(Integer magasinId) {
-        this.magasinId = magasinId;
-    }
+    public HashMap<String, Object> clientId;
+    public HashMap<String, Object> vendeurId;
+    public HashMap<String, Object> magasinId;
 }

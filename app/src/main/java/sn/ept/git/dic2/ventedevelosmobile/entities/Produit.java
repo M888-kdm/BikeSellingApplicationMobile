@@ -6,31 +6,16 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 
-@Entity(tableName = "produit", foreignKeys = {
-        @ForeignKey(entity = Marque.class, parentColumns = "id", childColumns = "marque_id"),
-        @ForeignKey(entity = Categorie.class, parentColumns = "id", childColumns = "categorie_id")
-})
 public class Produit {
 
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "ID")
-    private Integer id;
-
-    @ColumnInfo(name = "nom")
-    private String nom;
-
-    @ColumnInfo(name = "prixDepart")
-    private Double prixDepart;
-
-    @ColumnInfo(name = "anneeModel")
-    private short anneeModel;
-
-    @ColumnInfo(name = "marque_id")
-    private Integer marqueId;
-
-    @ColumnInfo(name = "categorie_id")
-    private Integer categorieId;
+    public Integer id;
+    public String nom;
+    public short anneeModel;
+    public HashMap<String, Object> categorie;
+    public HashMap<String, Object> marque;
+    public BigDecimal prixDepart;
 
     public Integer getId() {
         return id;
@@ -48,14 +33,6 @@ public class Produit {
         this.nom = nom;
     }
 
-    public Double getPrixDepart() {
-        return prixDepart;
-    }
-
-    public void setPrixDepart(Double prixDepart) {
-        this.prixDepart = prixDepart;
-    }
-
     public short getAnneeModel() {
         return anneeModel;
     }
@@ -64,19 +41,27 @@ public class Produit {
         this.anneeModel = anneeModel;
     }
 
-    public Integer getMarqueId() {
-        return marqueId;
+    public HashMap<String, Object> getCategorie() {
+        return categorie;
     }
 
-    public void setMarqueId(Integer marqueId) {
-        this.marqueId = marqueId;
+    public void setCategorie(HashMap<String, Object> categorie) {
+        this.categorie = categorie;
     }
 
-    public Integer getCategorieId() {
-        return categorieId;
+    public HashMap<String, Object> getMarque() {
+        return marque;
     }
 
-    public void setCategorieId(Integer categorieId) {
-        this.categorieId = categorieId;
+    public void setMarque(HashMap<String, Object> marque) {
+        this.marque = marque;
+    }
+
+    public BigDecimal getPrixDepart() {
+        return prixDepart;
+    }
+
+    public void setPrixDepart(BigDecimal prixDepart) {
+        this.prixDepart = prixDepart;
     }
 }

@@ -1,5 +1,7 @@
 package sn.ept.git.dic2.ventedevelosmobile.activities;
 
+import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,29 +10,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import sn.ept.git.dic2.ventedevelosmobile.R;
-import sn.ept.git.dic2.ventedevelosmobile.daos.CategorieDAO;
-import sn.ept.git.dic2.ventedevelosmobile.daos.MarqueDAO;
-import sn.ept.git.dic2.ventedevelosmobile.entities.Categorie;
-import sn.ept.git.dic2.ventedevelosmobile.entities.Marque;
 import sn.ept.git.dic2.ventedevelosmobile.entities.Produit;
 
 public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ProduitViewHolder> {
 
+    private Context context;
     private List<Produit> produitList;
+    private List<String> fields;
 
-    public ProduitAdapter(List<Produit> produitList) {
+    public ProduitAdapter(Context context, List<Produit> produitList) {
+        this.context = context;
         this.produitList = produitList;
     }
 
     @NonNull
     @Override
     public ProduitViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.produit_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.produit_layout, parent, false);
         return new ProduitViewHolder(view);
     }
 
@@ -38,17 +38,10 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ProduitV
     public void onBindViewHolder(@NonNull ProduitViewHolder holder, int position) {
         Produit produit = produitList.get(position);
         holder.nom.setText(produit.getNom());
-        holder.anneeModel.setText(produit.getAnneeModel());
+        holder.anneeModel.setText(Integer.toString(produit.getAnneeModel()));
         holder.prixDepart.setText(produit.getPrixDepart().toString());
-
-        MarqueDAO marqueDAO = ProductListActivity.database.marqueDAO();
-        CategorieDAO categorieDAO = ProductListActivity.database.categorieDAO();
-
-        Marque marque = marqueDAO.findById(produit.getId());
-        Categorie categorie = categorieDAO.findById(produit.getCategorieId());
-
-        holder.marque.setText(marque.getNom());
-        holder.categorie.setText(categorie.getNom());
+        holder.marque.setText(produit.getMarque().get("nom").toString());
+        holder.categorie.setText(produit.getCategorie().get("nom").toString());
     }
 
     @Override

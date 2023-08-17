@@ -7,11 +7,7 @@ import android.os.Bundle;
 
 import java.io.File;
 
-import sn.ept.git.dic2.ventedevelosmobile.database.AppDatabase;
-
 public class MainActivity extends AppCompatActivity {
-    public static AppDatabase appDatabase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
