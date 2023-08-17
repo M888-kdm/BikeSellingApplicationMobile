@@ -1,15 +1,17 @@
 package sn.ept.git.dic2.ventedevelosmobile.activities;
 
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
 import java.util.List;
 
 import sn.ept.git.dic2.ventedevelosmobile.R;
@@ -19,11 +21,57 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ProduitV
 
     private Context context;
     private List<Produit> produitList;
-    private List<String> fields;
+
+    private HashMap<String, Integer> fields;
+    private static LinearLayout list_item_layout;
 
     public ProduitAdapter(Context context, List<Produit> produitList) {
         this.context = context;
         this.produitList = produitList;
+    }
+
+    public void initializeFields(){
+        fields.put("nom", 0);
+        fields.put("prixDepart", 0);
+        fields.put("anneeModel", 0);
+        fields.put("marque", 0);
+        fields.put("categorie", 0);
+    }
+
+    public View getNewFieldView(ViewGroup viewGroup, String label, int text){
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.list_item_field_layout, viewGroup, false);
+
+        TextView labelTextView = v.findViewById(R.id.label);
+        labelTextView.setText(text);
+
+        TextView valueTextView = v.findViewById(R.id.value);
+        int generatedId = View.generateViewId();
+        valueTextView.setId(generatedId);
+        fields.put(label, generatedId);
+
+        return v;
+    }
+
+    public ViewGroup createLayout(View view){
+
+        list_item_layout = view.findViewById(R.id.list_item_layout);
+
+        ViewGroup viewGroup = (ViewGroup) view;
+
+        View nom = getNewFieldView(viewGroup, "nom", R.string.nom);
+        View prixDepart = getNewFieldView(viewGroup, "prixDepart", R.string.prixDepart);
+        View anneeModel = getNewFieldView(viewGroup, "anneeModel", R.string.anneeModel);
+        View marque = getNewFieldView(viewGroup, "prixDepart", R.string.marque);
+        View categorie = getNewFieldView(viewGroup, "prixDepart", R.string.categorie);
+
+        viewGroup.addView(nom);
+        viewGroup.addView(prixDepart);
+        viewGroup.addView(anneeModel);
+        viewGroup.addView(marque);
+        viewGroup.addView(categorie);
+
+        return viewGroup;
     }
 
     @NonNull
@@ -31,7 +79,8 @@ public class ProduitAdapter extends RecyclerView.Adapter<ProduitAdapter.ProduitV
     public ProduitViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.produit_layout, parent, false);
-        return new ProduitViewHolder(view);
+        ViewGroup viewGroup = createLayout(view);
+        return new ProduitViewHolder(viewGroup);
     }
 
     @Override
